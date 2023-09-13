@@ -1,6 +1,7 @@
 package tech.escalab.springdeliveries.domain.packagedata;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.hibernate.annotations.SQLDelete;
@@ -24,11 +25,12 @@ import java.util.*;
 public class PackageData {
     @Id
     private UUID uuid = UUID.randomUUID();
-    @NotNull
+    @NotNull(message = "{package.code.not.null}")
+    @NotEmpty(message = "{package.code.not.empty}")
     private String code;
-    @NotNull
+    @NotNull(message = "{package.weight.not.null}")
     private double weight;
-    @NotNull
+    @NotNull(message = "{package.schedule.not.null}")
     private LocalDateTime schedule;
     @Enumerated(EnumType.STRING)
     private PackageStatus status = PackageStatus.IN_TRANSIT;

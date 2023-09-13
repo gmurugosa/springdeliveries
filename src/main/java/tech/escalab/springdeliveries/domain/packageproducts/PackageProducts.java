@@ -2,6 +2,8 @@ package tech.escalab.springdeliveries.domain.packageproducts;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.hibernate.annotations.SQLDelete;
@@ -27,13 +29,16 @@ public class PackageProducts {
     @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     private PackageData packageData;
-    @NotNull
+    @NotNull(message = "{packageProducts.code.not.null}")
+    @NotEmpty(message = "{packageProducts.code.not.empty}")
     private String code;
-    @NotNull
+    @NotNull(message = "{packageProducts.weight.not.null}")
     private Double weight;
-    @NotNull
+    @NotNull(message = "{packageProducts.sku.not.null}")
+    @NotEmpty(message = "{packageProducts.sku.not.empty}")
     private String sku;
-    @NotNull
+    @NotNull(message = "{packageProducts.quantity.not.null}")
+    @Min(value = 1, message = "{packageProducts.quantity.invalid.value}")
     private Integer quantity;
     private boolean isDeleted;
     private LocalDateTime deletedAt;

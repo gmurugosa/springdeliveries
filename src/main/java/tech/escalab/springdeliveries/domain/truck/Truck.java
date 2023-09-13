@@ -1,6 +1,7 @@
 package tech.escalab.springdeliveries.domain.truck;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -27,9 +28,10 @@ import java.util.UUID;
 public class Truck {
     @Id
     private UUID uuid = UUID.randomUUID();
-    @NotNull
+    @NotNull(message = "{truck.code.not.null}")
+    @NotEmpty(message = "{truck.code.not.empty}")
     private String code;
-    @NotNull
+    @NotNull(message = "{driver.enabled.not.null}")
     private boolean enabled;
     private boolean isDeleted;
     private LocalDateTime deletedAt;

@@ -2,6 +2,7 @@ package tech.escalab.springdeliveries.domain.driver;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,14 +27,18 @@ public class Driver {
 
     @Id
     private UUID uuid = UUID.randomUUID();
-    @NotNull
+    @NotNull(message = "{driver.code.not.null}")
+    @NotEmpty(message = "{driver.code.not.empty}")
     private String code;
-    @NotNull
+    @NotNull(message = "{driver.name.not.null}")
+    @NotEmpty(message = "{driver.name.not.empty}")
     private String name;
+    @NotNull(message = "{driver.cellphone.not.null}")
+    @NotEmpty(message = "{driver.cellphone.not.empty}")
     private String cellphone;
-    @Email
+    @Email(message = "{driver.email.not.valid}")
     private String email;
-    @NotNull
+    @NotNull(message = "{driver.enabled.not.null}")
     private boolean enabled;
     private boolean isDeleted;
     private LocalDateTime deletedAt;

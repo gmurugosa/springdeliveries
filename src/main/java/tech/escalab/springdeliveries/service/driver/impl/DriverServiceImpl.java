@@ -26,7 +26,7 @@ public class DriverServiceImpl implements DriverService {
 
     @Override
     public Driver findByUuid(UUID uuid) {
-        return driverRepositoryJpa.findById(uuid).get();
+        return driverRepositoryJpa.findById(uuid).orElse(null);
     }
 
     @Override
